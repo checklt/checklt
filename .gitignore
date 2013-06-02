@@ -1,0 +1,7 @@
+.metadata
+.gradle
+checker-lattice-tainting-plugin/.project
+checker-lattice-tainting-plugin/.classpath
+checker-lattice-tainting-plugin/bin
+checker-lattice-tainting-plugin/build
+eclimd.log

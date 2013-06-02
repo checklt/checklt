@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="linear-lattice" type="linear-latticeType"/>
+    <xs:complexType name="level-specsType">
+        <xs:sequence>
+            <xs:element type="level-specType" name="level-spec" maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>level spec for Public level spec for User level spec for UserTrusts level spec for
+                        UserTrusts
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="linear-latticeType">
+        <xs:sequence>
+            <xs:element type="levelsType" name="levels">
+                <xs:annotation>
+                    <xs:documentation>all levels must first be declared</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element type="level-specsType" name="level-specs"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="levelsType">
+        <xs:sequence>
+            <xs:element name="level" maxOccurs="unbounded" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Private"/>
+                        <xs:enumeration value="UserTrusts"/>
+                        <xs:enumeration value="User"/>
+                        <xs:enumeration value="Public"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="trustsType" mixed="true">
+        <xs:sequence>
+            <xs:element name="level" maxOccurs="unbounded" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Private"/>
+                        <xs:enumeration value="UserTrusts"/>
+                        <xs:enumeration value="User"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="level-specType">
+        <xs:sequence>
+            <xs:element name="name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Public"/>
+                        <xs:enumeration value="User"/>
+                        <xs:enumeration value="UserTrusts"/>
+                        <xs:enumeration value="Private"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element type="trustsType" name="trusts">
+                <xs:annotation>
+                    <xs:documentation>trusts no one (other than self)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

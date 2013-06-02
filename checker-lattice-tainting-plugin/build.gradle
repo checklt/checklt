@@ -1,0 +1,71 @@
+apply plugin: 'java'
+
+// note: there is a minor bug in gradle that forces you to make a special modification for this project to compile after you regenerate the eclipse files
+// 
+// Since Checker includes classes from java.lang.* --- you MUST make sure that the JRE is LAST on the classpath.
+// That means you need to modify the .classpath file to have this line last:
+//         <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+
+apply plugin: 'eclipse'
+
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
+
+defaultTasks 'jar'
+
+
+
+task debug << {
+    configurations.compile.each { println it }
+}
+
+// compileJava { 
+//     options.fork(executable: '/usr/bin/javac') 
+// } 
+
+
+jar {
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest { attributes 'Main-Class': 'checkers.util.CheckerMain' }
+}
+
+eclipse {
+  jdt {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+  }
+}
+
+repositories {
+    flatDir {
+      dirs '../checker-framework/checkers/binary/'
+      //, '/Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/Home/lib/'
+    }
+    mavenCentral()
+
+
+}
+
+dependencies{
+  compile name: 'javac'
+  compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+  compile name: 'checkers'
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/'
+        }
+        // resources {
+        //     srcDir 'src/resources'
+        // }
+
+
+
+    }
+}
+

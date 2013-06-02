@@ -1,0 +1,35 @@
+
+defaultTasks 'clean', 'dist'
+
+
+task dist(dependsOn: ':checker-lattice-tainting-plugin:jar') << {
+}
+
+
+
+
+dist.doFirst {
+  println "========================================="
+  println " Creating JAINT Distribution             "
+  println "========================================="
+}
+
+
+
+// allprojects {
+//     task hello << {task -> println "I'm $task.project.name" }
+// }
+// subprojects {
+//     hello << {println "- I depend on water"}
+// }
+
+// sourceSets {
+//     main {
+//         java {
+//             srcDir 'src/java'
+//         }
+//         resources {
+//             srcDir 'src/resources'
+//         }
+//     }
+// }

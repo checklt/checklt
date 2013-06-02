@@ -1,0 +1,59 @@
+<linear-lattice>
+
+    <!-- all levels must first be declared -->
+    <levels>
+        <level>Private</level>
+        <level>UserTrusts</level>
+        <level>User</level>
+        <level>Public</level>
+    </levels>
+
+
+    <level-specs>
+
+        <!-- level spec for Public -->
+        <level-spec>
+            <name>Public</name>
+
+            <trusts>
+                <level>Private</level>
+                <level>UserTrusts</level>
+                <level>User</level>
+            </trusts>
+        </level-spec>
+
+        <!-- level spec for User -->
+        <level-spec>
+            <name>User</name>
+
+            <trusts>
+                <level>UserTrusts</level>
+
+            </trusts>
+        </level-spec>
+
+
+        <!-- level spec for UserTrusts -->
+        <level-spec>
+            <name>UserTrusts</name>
+
+            <trusts>
+                <level>Private</level>
+
+            </trusts>
+        </level-spec>
+
+
+        <!-- level spec for UserTrusts -->
+        <level-spec>
+            <name>Private</name>
+
+            <trusts>
+                <!-- trusts no one (other than self) -->
+            </trusts>
+        </level-spec>
+
+
+    </level-specs>
+
+</linear-lattice>
