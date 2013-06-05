@@ -1,0 +1,16 @@
+#!/bin/sh
+
+
+cat >/usr/bin/checklt-env <<EOF
+#!/bin/sh
+echo "$1" 
+
+
+
+EOF
+
+chmod +x /usr/bin/checklt-env
+
+rm /usr/bin/checklt
+
+ln -s "$1/checklt" /usr/bin/checklt

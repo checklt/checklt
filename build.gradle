@@ -1,16 +1,49 @@
+//
+// Note that you must have the "compile" command from izpack on your PATH
+//
+import org.apache.tools.ant.taskdefs.condition.Os
 
-defaultTasks 'clean', 'dist'
+defaultTasks 'clean', 'dist', 'makeInstaller'
+
+
+
 
 
 task dist(dependsOn: ':checker-lattice-tainting-plugin:jar') << {
+
+}
+
+task makeInstaller(type:Exec)  {
+
+
+    workingDir 'installer'
+
+  if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+    // this needs to be tested
+    //throw new GradleException("Building on Windows is not Currently Supported")
+    // commandLine 'cmd', 'compile', 'install.xml', '-b', '.', '-o', 'checklt-installer.jar', '-k', 'standard'
+  }else{ // All Unix-i
+
+    workingDir 'installer'
+    commandLine 'compile', 'install.xml', '-b', '.', '-o', '../dist/checklt-installer.jar', '-k', 'standard'
+  }
+
 }
 
 
 
 
-dist.doFirst {
+makeInstaller.doFirst {
   println "========================================="
-  println " Creating JAINT Distribution             "
+  println " Creating CheckLT Distribution             "
+  println "========================================="
+}
+
+
+
+makeInstaller.doLast {
+  println "========================================="
+  println " Complete! See installer in dist/checklt-installer.jar "
   println "========================================="
 }
 

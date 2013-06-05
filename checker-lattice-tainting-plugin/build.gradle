@@ -15,6 +15,9 @@ targetCompatibility=1.7
 defaultTasks 'jar'
 
 
+configurations {
+    dist
+}
 
 task debug << {
     configurations.compile.each { println it }
@@ -26,8 +29,9 @@ task debug << {
 
 
 jar {
-    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    manifest { attributes 'Main-Class': 'checkers.util.CheckerMain' }
+    
+  from { configurations.dist.collect { it.isDirectory() ? it : zipTree(it) } }
+  manifest { attributes 'Main-Class': 'checkers.util.CheckerMain' }
 }
 
 eclipse {
@@ -52,6 +56,10 @@ dependencies{
   compile name: 'javac'
   compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
   compile name: 'checkers'
+
+  dist group: 'dom4j', name: 'dom4j', version: '1.6.1'
+
+
 }
 
 

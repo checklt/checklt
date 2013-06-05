@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+CHECKLT_HOME=$(/usr/bin/checklt-env)
+
+eval "java" "-jar" "${CHECKLT_HOME}"/lib/checkers.jar -classpath "${CHECKLT_HOME}"/lib/checker-lattice-tainting-plugin.jar  -processor checkers.latticetainting.LatticeTaintingChecker "$@"
+
