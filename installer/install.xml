@@ -73,15 +73,26 @@
 	    <file src="../checker-framework/checkers/binary/javac.jar" targetdir="$INSTALL_PATH/lib/"/>
 	    <file src="../checker-framework/checkers/binary/jdk7.jar" targetdir="$INSTALL_PATH/lib/"/>
 	    <file src="../stubs/checklt" targetdir="$INSTALL_PATH"/>
+	    <file src="../stubs/checklt.bat" targetdir="$INSTALL_PATH"/>
+
 	    <file src="../stubs/update_links" targetdir="$INSTALL_PATH"/>
+	    <file src="../stubs/update_path.bat" targetdir="$INSTALL_PATH"/>
+
 
 
 	    <executable os="unix" targetfile="$INSTALL_PATH/update_links" stage="postinstall"  keep="false">
 	      <args>
 		<arg value="$INSTALL_PATH"/>
 	      </args>
-
 	    </executable>
+
+
+	    <executable os="windows" targetfile="$INSTALL_PATH/update_path.bat" stage="postinstall"  keep="false">
+	      <args>
+		<arg value="$INSTALL_PATH"/>
+	      </args>
+	    </executable>
+
 
 	    <executable targetfile="$INSTALL_PATH/checklt" stage="never"  keep="true" />
 

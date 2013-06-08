@@ -5,3 +5,9 @@ checker-lattice-tainting-plugin/.classpath
 checker-lattice-tainting-plugin/bin
 checker-lattice-tainting-plugin/build
 eclimd.log
+examples/bin
+examples/.settings
+examples/build
+examples/.project
+examples/.classpath
+dist

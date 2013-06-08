@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+
+task(runDatabaseExample, dependsOn: 'classes', type: JavaExec) {
+  main = 'SqlExample'
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+defaultTasks 'runDatabaseExample'
+
+
+// task verifyDatabaseExample(type:Exec)  {
+
+// }
+
+
+
+sourceCompatibility=1.7
+targetCompatibility=1.7
+
+eclipse {
+  jdt {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+  }
+}
+
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/'
+        }
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies{
+  compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.2'
+}
+

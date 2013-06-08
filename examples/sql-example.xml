@@ -1,0 +1,33 @@
+<linear-lattice>
+
+
+    <levels>
+        <level>Internal</level>
+        <level>TouchedByUser</level>
+    </levels>
+
+    <level-specs>
+
+        <level-spec>
+            <name>Internal</name>
+
+            <trusts>
+                <level>TouchedByUser</level>
+            </trusts>
+        </level-spec>
+
+        <!-- level spec for User -->
+        <level-spec>
+            <name>TouchedByUser</name>
+
+            <trusts>
+	      <!-- 
+		   this sort of information is "quarantined" and my not 
+		   go anywhere
+	      -->
+            </trusts>
+        </level-spec>
+
+    </level-specs>
+
+</linear-lattice>
