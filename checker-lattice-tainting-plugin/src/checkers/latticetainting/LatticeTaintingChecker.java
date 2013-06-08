@@ -16,6 +16,8 @@ import checkers.util.AnnotationUtils;
 import checkers.util.GraphQualifierHierarchy;
 import checkers.util.MultiGraphQualifierHierarchy;
 import checkers.util.TreeUtils;
+import javax.annotation.processing.SupportedOptions;
+
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.ExecutableElement;
