@@ -26,6 +26,7 @@ import java.util.Set;
 
 
 @TypeQualifiers({Level.class, LevelBottom.class})
+@SupportedOptions({"lattice"})
 @SuppressWarningsKey("safe")
 public class LatticeTaintingChecker extends BaseTypeChecker {
 

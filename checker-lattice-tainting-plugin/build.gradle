@@ -63,7 +63,8 @@ dependencies{
 
 compileJava {
   // this is needed because checker overrides the boot classpath via java.lang.annotation*;
-    options.compilerArgs << '-Xbootclasspath/p:../checker-framework/checkers/binary/javac.jar'
+  // this is slightly a hack so we can execute this command as a part of a full build or otherwise.
+    options.compilerArgs << '-Xbootclasspath/p:../checker-framework/checkers/binary/javac.jar:checker-framework/checkers/binary/javac.jar'
     // options.fork = true
     // options.forkOptions.executable = 'javac'
 }

@@ -9,12 +9,12 @@ public class Simple {
         @Level("Public")
         int c = 100; 
 
-        // @Level("Private")
-        // int d = 100;
+        @Level("Private")
+        int d = 100;
 
         // // Not OK
-        // @Level("Public")
-        // int e = Simple.testVal();
+        @Level("Public")
+        int e = Simple.testVal();
 
         // // Assignment OK
         // d = c;
@@ -24,7 +24,7 @@ public class Simple {
     }
 
     public static int testVal() {
-	//@Level("Private")
+	@Level("Private")
         int notSecret = 1000;
         return notSecret;
     }
