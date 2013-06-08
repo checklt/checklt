@@ -7,7 +7,7 @@ public class Simple {
     public static void main(String args[]) {
 
         @Level("Public")
-        int c = 100;
+        int c = 100; 
 
         // @Level("Private")
         // int d = 100;
@@ -24,7 +24,7 @@ public class Simple {
     }
 
     public static int testVal() {
-	//        @Level("Private")
+	//@Level("Private")
         int notSecret = 1000;
         return notSecret;
     }

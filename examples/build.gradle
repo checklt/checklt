@@ -39,10 +39,17 @@ sourceSets {
 
 
 repositories {
+
+    flatDir {
+      dirs '../checker-lattice-tainting-plugin/build/libs/'
+    }
+
     mavenCentral()
 }
 
 dependencies{
   compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.2'
+  compile name: 'checker-lattice-tainting-plugin'
+
 }
 

@@ -23,11 +23,6 @@ task debug << {
     configurations.compile.each { println it }
 }
 
-// compileJava { 
-//     options.fork(executable: '/usr/bin/javac') 
-// } 
-
-
 jar {
     
   from { configurations.dist.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -66,17 +61,18 @@ dependencies{
 }
 
 
+compileJava {
+  // this is needed because checker overrides the boot classpath via java.lang.annotation*;
+    options.compilerArgs << '-Xbootclasspath/p:../checker-framework/checkers/binary/javac.jar'
+    // options.fork = true
+    // options.forkOptions.executable = 'javac'
+}
+
 sourceSets {
     main {
         java {
             srcDir 'src/'
         }
-        // resources {
-        //     srcDir 'src/resources'
-        // }
-
-
-
     }
 }
 
