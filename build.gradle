@@ -2,6 +2,8 @@
 // Note that you must have the "compile" command from izpack on your PATH
 //
 import org.apache.tools.ant.taskdefs.condition.Os
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 defaultTasks 'clean', 'dist', 'makeInstaller'
 
@@ -13,7 +15,7 @@ task dist(dependsOn: ':checker-lattice-tainting-plugin:jar') << {
 
 }
 
-task makeInstaller(type:Exec)  {
+task makeInstaller(type:Exec, dependsOn: ":updateBuild")  {
 
 
     workingDir 'installer'
@@ -30,6 +32,31 @@ task makeInstaller(type:Exec)  {
 
 }
 
+
+task release(type:Exec){
+
+  // calculate a new build string
+  def fmt  = "MMMddyyyy"
+  def BUILD = new SimpleDateFormat(fmt).format(new Date()).toUpperCase()
+
+  // this only works if you have the checklt-docs directory checked out 
+  // BELOW this directory and switched in to the gh-pages branch
+  workingDir 'installer'
+  commandLine 'sh', 'package.sh', BUILD
+
+
+}
+
+task updateBuild(type:Exec) {
+
+  // calculate a new build string
+  def fmt  = "MMMddyyyy"
+  def BUILD = new SimpleDateFormat(fmt).format(new Date()).toUpperCase()
+
+  workingDir 'installer'
+  commandLine 'sed', '-e', "s/build-.*</build-${BUILD}</g", '-i', 'bak', 'install.xml'
+
+}
 
 
 
