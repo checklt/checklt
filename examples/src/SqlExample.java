@@ -43,7 +43,7 @@ public class SqlExample {
 	executeQuery(getBaseQuery());
     }
 
-    public void getAndRunQueryFromUser(){
+    public void getAndRunQueryFromUser() throws Exception {
 
 	// baseQuery is implicitly @Level("Internal")
 	String baseQuery = getBaseQuery();
@@ -51,7 +51,12 @@ public class SqlExample {
 	// newQuery is now @Level("TouchedByUser");
 	String newQuery = baseQuery + getQueryFromUser();
 
-	// executeQuery(newQuery);
+	
+	// This call will fail
+	//executeQuery(newQuery);
+	
+	// It must be called like:
+	executeQuery(SqlExample.sanitizeUserInput(newQuery));
     }
 
     
@@ -73,6 +78,22 @@ public class SqlExample {
       }
       return query;
     }
+
+
+    @Level("Internal")
+    public static String sanitizeUserInput(@Level("TouchedByUser") String dirty){
+
+	//
+	// do some cleanup, remove SQL injections, etc
+	//
+	
+	// Mark this as "clean" input
+        @SuppressWarnings("safe")
+        @Level("Internal")
+        String clean = dirty;
+        
+        return clean;
+    } 
 
     public static void main(String args[]) throws Exception {
 

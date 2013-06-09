@@ -2,25 +2,28 @@ import checkers.latticetainting.quals.Level;
 
 
 public class Simple {
-    
+     
 
     public static void main(String args[]) {
 
-        @Level("Public")
-        int c = 100; 
-
-        @Level("Private")
-        int d = 100;
-
-        // // Not OK
-        @Level("Public")
-        int e = Simple.testVal();
-
-        // // Assignment OK
-        // d = c;
+	// This assiangment is from Private -> Public
+	// which is not allowed in our lattice
         
-        // // Assignment NOT OK
-        // c = d;
+	//@Level("Public")
+        //int e = Simple.testVal();
+
+	// To allow such an assignment, we can "declassify" the value
+	// like so:
+
+	@Level("Private")
+	int secretValue = Simple.testVal();
+
+	@Level("Public")
+	int publicValue = declassify(secretValue);
+	
+	
+
+
     }
 
     public static int testVal() {
@@ -31,13 +34,14 @@ public class Simple {
 
 
 
-    // public static int declassify(@Level("Private") int privateVal){
-    //     @SuppressWarnings("safe")
-    //     @Level("Public")
-    //     int publicVal = privateVal;
+    @Level("Public")
+    public static int declassify(@Level("Private") int privateVal){
+        @SuppressWarnings("safe")
+        @Level("Public")
+        int publicVal = privateVal;
         
-    //     return publicVal;
-    // }  
+        return publicVal;
+    }  
 
 
 

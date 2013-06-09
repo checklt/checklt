@@ -86,7 +86,7 @@ public class LatticeTaintingChecker extends BaseTypeChecker {
         @Override
         public Set<AnnotationMirror> leastUpperBounds(Collection<AnnotationMirror> annos1, Collection<AnnotationMirror> annos2) {
 
-            System.out.println("Least upper bounds!");
+            //System.out.println("Least upper bounds!");
 
             return super.leastUpperBounds(annos1, annos2);
         }
