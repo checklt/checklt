@@ -56,7 +56,7 @@ public class LatticeTaintingChecker extends BaseTypeChecker {
         labelNameElement = TreeUtils.getMethod("checkers.latticetainting.quals.Level", LEVEL_NAME, 0, processingEnv);
 
 
-        //setup the lattice.
+        // setup the lattice.
 
         // this may be overridden with -Alattice=myfile.xml
 
@@ -86,15 +86,11 @@ public class LatticeTaintingChecker extends BaseTypeChecker {
         @Override
         public Set<AnnotationMirror> leastUpperBounds(Collection<AnnotationMirror> annos1, Collection<AnnotationMirror> annos2) {
 
-            //System.out.println("Least upper bounds!");
-
             return super.leastUpperBounds(annos1, annos2);
         }
 
         @Override
         public AnnotationMirror greatestLowerBound(AnnotationMirror a1, AnnotationMirror a2) {
-
-            System.out.println("Finding GLB Of Two Types.");
 
             return super.greatestLowerBound(a1, a2);
 
@@ -107,16 +103,6 @@ public class LatticeTaintingChecker extends BaseTypeChecker {
 
         @Override
         public boolean isSubtype(AnnotationMirror anno1, AnnotationMirror anno2) {
-//            if (AnnotationUtils.areSameIgnoringValues(rhs, REGEX)
-//                    && AnnotationUtils.areSameIgnoringValues(lhs, REGEX)) {
-//                int rhsValue = getRegexValue(rhs);
-//                int lhsValue = getRegexValue(lhs);
-//                return lhsValue <= rhsValue;
-//            }
-
-
-            //System.out.println(String.format("Anno1 Label: %s, Anno2 Label: %s", getAnnotationLabel(anno1), getAnnotationLabel(anno2)));
-
 
             // is anno1 a subtype of anno2?
 
@@ -131,7 +117,7 @@ public class LatticeTaintingChecker extends BaseTypeChecker {
                 return true;
             }
 
-
+ 
             return false;
             //return super.isSubtype(anno1, anno2);
         }
