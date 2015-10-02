@@ -5,16 +5,26 @@ import org.apache.tools.ant.taskdefs.condition.Os
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-defaultTasks 'clean', 'dist', 'makeInstaller'
+defaultTasks 'dist', 'makePackage'
+
+// apply plugin: 'distribution'
 
 
-
+// distributions {
+//     main {
+//         baseName = 'someName'
+//         contents {
+//             from { 'src/readme' }
+//         }
+//     }
+// }
 
 
 task dist(dependsOn: ':checker-lattice-tainting-plugin:jar') << {
 
 }
 
+// this is no longer supported (we have migrated to spekl)
 task makeInstaller(type:Exec, dependsOn: ":updateBuild")  {
 
 
@@ -31,6 +41,37 @@ task makeInstaller(type:Exec, dependsOn: ":updateBuild")  {
   }
 
 }
+
+
+
+task makePackage(type: Tar) {
+  def fmt  = "MMMddyyyy"
+  def BUILD = new SimpleDateFormat(fmt).format(new Date()).toUpperCase()
+
+  extension = 'tar.gz'
+  baseName = project.name + "-" + BUILD
+  compression = Compression.GZIP
+
+  into("lib") { from "checker-lattice-tainting-plugin/build/libs/checker-lattice-tainting-plugin.jar" }
+
+  into("lib") { from "checker-framework/checkers/binary/checkers.jar" }
+  into("lib") { from "checker-framework/checkers/binary/javac.jar" }
+  into("lib") { from "checker-framework/checkers/binary/jdk7.jar" }
+  into("/") { from "stubs/checklt" }
+  into("/") { from "stubs/checklt.bat" }
+
+
+}
+
+// task makePackage(dependsOn: 'initArchive',type: Tar) {
+//     baseName = "test-name"
+//     destinationDir = new File('/installer')
+//     compression = Compression.GZIP
+//     from (archiveDir)
+//     doLast{
+//         checksum(archivePath)
+//     }
+// }
 
 
 task release(type:Exec){

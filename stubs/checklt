@@ -1,7 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
+CHECKLT_HOME=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-CHECKLT_HOME=$(/usr/bin/checklt-env)
+if  uname | grep -iq CYGWIN
+then
+    JARFILE=`cygpath -w "$CHECKLT_HOME/lib/checkers.jar"`
+    CLASSPATH=`cygpath -w "$CHECKLT_HOME/lib/checker-lattice-tainting-plugin.jar"`
+else
+    JARFILE="$CHECKLT_HOME/lib/checkers.jar"
+    CLASSPATH="$CHECKLT_HOME/lib/checker-lattice-tainting-plugin.jar"
+fi
 
-eval "java" "-jar" "${CHECKLT_HOME}"/lib/checkers.jar -classpath "${CHECKLT_HOME}"/lib/checker-lattice-tainting-plugin.jar  -processor checkers.latticetainting.LatticeTaintingChecker "$@"
+java -jar "$JARFILE" -classpath "$CLASSPATH"  -processor checkers.latticetainting.LatticeTaintingChecker "$@"
 
